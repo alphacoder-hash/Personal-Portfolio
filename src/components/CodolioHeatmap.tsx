@@ -14,24 +14,32 @@ const theme: ThemeInput = {
 };
 
 export default function CodolioHeatmap({ heatmapData }: CodolioHeatmapProps) {
+    const [isMobile, setIsMobile] = React.useState(false);
+
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     const data = useMemo(() => {
         const calendarData: { date: string; count: number; level: number }[] = [];
         const timestamps = Object.keys(heatmapData).map(Number).sort((a, b) => a - b);
 
         if (timestamps.length === 0) return [];
 
-        // Map timestamps to dates
         const dateMap = new Map<string, number>();
         timestamps.forEach((ts) => {
             const date = format(fromUnixTime(ts), 'yyyy-MM-dd');
             dateMap.set(date, heatmapData[ts.toString()]);
         });
 
-        // Fill in missing days for the last year
         const today = new Date();
-        const oneYearAgo = subYears(today, 1);
+        // Show only last 6 months on mobile for better fit
+        const startDate = isMobile ? subYears(today, 0.5) : subYears(today, 1);
 
-        let currentDate = oneYearAgo;
+        let currentDate = startDate;
         while (currentDate <= today) {
             const dateStr = format(currentDate, 'yyyy-MM-dd');
             const count = dateMap.get(dateStr) || 0;
@@ -52,13 +60,13 @@ export default function CodolioHeatmap({ heatmapData }: CodolioHeatmapProps) {
         }
 
         return calendarData;
-    }, [heatmapData]);
+    }, [heatmapData, isMobile]);
 
     if (!data || data.length === 0) return <div className="text-slate-500">No activity data found.</div>;
 
     return (
-        <div className="w-full overflow-x-auto py-4 scrollbar-hide">
-            <div className="min-w-[800px] flex justify-center">
+        <div className="w-full flex justify-center py-4">
+            <div className="w-full max-w-full overflow-hidden flex justify-center">
                 <ActivityCalendar
                     data={data}
                     theme={theme}
@@ -72,11 +80,11 @@ export default function CodolioHeatmap({ heatmapData }: CodolioHeatmapProps) {
                             'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                             'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
                         ],
-                        totalCount: '{{count}} contributions in the last year',
+                        totalCount: '{{count}} items in selected period',
                     }}
-                    blockSize={14}
-                    blockMargin={4}
-                    fontSize={14}
+                    blockSize={isMobile ? 10 : 14}
+                    blockMargin={isMobile ? 3 : 4}
+                    fontSize={isMobile ? 12 : 14}
                 />
             </div>
         </div>

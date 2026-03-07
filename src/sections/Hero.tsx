@@ -94,8 +94,8 @@ const Hero = () => {
     };
 
     return (
-        <section id="hero" className="relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
-            <div className="container mx-auto max-w-6xl z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center text-white">
+        <section id="hero" className="relative min-h-screen flex items-center justify-center pt-28 pb-12 px-6 overflow-hidden">
+            <div className="container mx-auto max-w-6xl z-10 flex flex-col lg:grid lg:grid-cols-2 gap-12 items-center text-white">
 
                 {/* Left Column - Text Content */}
                 <motion.div
@@ -166,7 +166,7 @@ const Hero = () => {
 
                 {/* Right Column - Avatar & Floating Objects */}
                 <motion.div
-                    className="flex-1 relative hidden lg:flex justify-center items-center w-full h-[500px]"
+                    className="flex-1 relative flex justify-center items-center w-full h-[300px] sm:h-[400px] lg:h-[500px] order-first lg:order-last"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1, delay: 0.5 }}
@@ -179,7 +179,7 @@ const Hero = () => {
                     <motion.div
                         animate={{ y: [0, -15, 0] }}
                         transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                        className="relative z-10 w-64 h-64 md:w-80 md:h-80 rounded-full glass border-4 border-cyan-400/50 shadow-[0_0_40px_rgba(34,211,238,0.3)] overflow-hidden flex items-center justify-center p-2"
+                        className="relative z-10 w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full glass border-4 border-cyan-400/50 shadow-[0_0_40px_rgba(34,211,238,0.3)] overflow-hidden flex items-center justify-center p-2"
                     >
                         <div className="w-full h-full rounded-full overflow-hidden">
                             <img src="/avatar.png" alt="Vaibhav Pandey" className="w-full h-full object-cover" />
@@ -187,20 +187,20 @@ const Hero = () => {
                     </motion.div>
 
                     {/* Floating Tech Icons */}
-                    <motion.div custom={1} variants={floatingIconVariants} animate="animate" className="absolute top-10 left-10 p-4 rounded-2xl glass border border-blue-400/30 text-blue-400 shadow-lg z-20">
-                        <Code size={32} />
+                    <motion.div custom={1} variants={floatingIconVariants} animate="animate" className="absolute top-0 lg:top-10 left-0 lg:left-10 p-3 sm:p-4 rounded-2xl glass border border-blue-400/30 text-blue-400 shadow-lg z-20">
+                        <Code size={24} className="sm:w-8 sm:h-8" />
                     </motion.div>
-                    <motion.div custom={2} variants={floatingIconVariants} animate="animate" className="absolute bottom-20 left-4 p-4 rounded-2xl glass border border-purple-400/30 text-purple-400 shadow-lg z-20">
-                        <Terminal size={32} />
+                    <motion.div custom={2} variants={floatingIconVariants} animate="animate" className="absolute bottom-10 lg:bottom-20 left-0 lg:left-4 p-3 sm:p-4 rounded-2xl glass border border-purple-400/30 text-purple-400 shadow-lg z-20">
+                        <Terminal size={24} className="sm:w-8 sm:h-8" />
                     </motion.div>
-                    <motion.div custom={3} variants={floatingIconVariants} animate="animate" className="absolute top-20 right-4 p-4 rounded-2xl glass border border-cyan-400/30 text-cyan-400 shadow-lg z-20">
-                        <Cpu size={32} />
+                    <motion.div custom={3} variants={floatingIconVariants} animate="animate" className="absolute top-10 lg:top-20 right-0 lg:right-4 p-3 sm:p-4 rounded-2xl glass border border-cyan-400/30 text-cyan-400 shadow-lg z-20">
+                        <Cpu size={24} className="sm:w-8 sm:h-8" />
                     </motion.div>
-                    <motion.div custom={4} variants={floatingIconVariants} animate="animate" className="absolute bottom-10 right-10 p-4 rounded-2xl glass border border-indigo-400/30 text-indigo-400 shadow-lg z-20">
-                        <Database size={32} />
+                    <motion.div custom={4} variants={floatingIconVariants} animate="animate" className="absolute bottom-0 lg:bottom-10 right-0 lg:right-10 p-3 sm:p-4 rounded-2xl glass border border-indigo-400/30 text-indigo-400 shadow-lg z-20">
+                        <Database size={24} className="sm:w-8 sm:h-8" />
                     </motion.div>
-                    <motion.div custom={5} variants={floatingIconVariants} animate="animate" className="absolute top-1/2 -right-8 p-4 rounded-2xl glass border border-pink-400/30 text-pink-400 shadow-lg z-20">
-                        <Layers size={32} />
+                    <motion.div custom={5} variants={floatingIconVariants} animate="animate" className="absolute top-1/2 -right-4 lg:-right-8 p-3 sm:p-4 rounded-2xl glass border border-pink-400/30 text-pink-400 shadow-lg z-20">
+                        <Layers size={24} className="sm:w-8 sm:h-8" />
                     </motion.div>
 
                 </motion.div>
