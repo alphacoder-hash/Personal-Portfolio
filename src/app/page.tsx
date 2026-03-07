@@ -8,6 +8,8 @@ import Projects from "@/sections/Projects";
 import Achievements from "@/sections/Achievements";
 import Contact from "@/sections/Contact";
 
+export const dynamic = 'force-dynamic';
+
 export default function Home() {
   return (
     <div className="flex flex-col overflow-hidden w-full">

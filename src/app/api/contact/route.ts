@@ -1,11 +1,7 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
 
 function logToDebug(message: string) {
-    const logPath = path.join(process.cwd(), 'api_debug.log');
-    const timestamp = new Date().toISOString();
-    fs.appendFileSync(logPath, `[${timestamp}] ${message}\n`);
+    console.log(`[API Debug] ${message}`);
 }
 
 export async function POST(request: Request) {
