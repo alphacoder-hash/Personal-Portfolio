@@ -7,6 +7,7 @@ import GithubSection from "@/sections/GithubSection";
 import Projects from "@/sections/Projects";
 import Achievements from "@/sections/Achievements";
 import Contact from "@/sections/Contact";
+import LinkedInSection from "@/sections/LinkedInSection";
 
 export const dynamic = 'force-dynamic';
 
@@ -16,9 +17,8 @@ export default function Home() {
       <Hero />
       <CodolioDashboard />
       <About />
-      <Skills />
       <GithubSection />
-
+      <LinkedInSection />
       <Projects />
       <Achievements />
       <Contact />

@@ -110,7 +110,7 @@ const Hero = () => {
                     </motion.div>
 
                     <motion.div variants={itemVariants} className="space-y-4 w-full">
-                        <h1 className="text-5xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.1]">
+                        <h1 className="text-4xl sm:text-6xl lg:text-8xl font-extrabold tracking-tight leading-[1.1]">
                             Vaibhav <br className="hidden lg:block" />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-400">Pandey</span>
                         </h1>
@@ -127,19 +127,19 @@ const Hero = () => {
                         Pre-Final Year Computer Science Student passionate about engineering efficient solutions and solving complex algorithmic challenges. Currently focused on building scalable applications and mastering technologies for the professional world.
                     </motion.p>
 
-                    <motion.div variants={itemVariants} className="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
-                        <a href="#projects" className="group relative px-8 py-4 bg-white text-black font-bold rounded-full overflow-hidden transition-transform hover:scale-105 active:scale-95 flex items-center gap-2">
+                    <motion.div variants={itemVariants} className="flex flex-wrap justify-center lg:justify-start gap-4 pt-4 w-full">
+                        <a href="#projects" className="group relative px-6 py-3.5 sm:px-8 sm:py-4 bg-white text-black font-bold rounded-full overflow-hidden transition-transform hover:scale-105 active:scale-95 flex items-center gap-2 text-sm sm:text-base">
                             <span className="relative z-10">View Projects</span>
                             <ChevronRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
                             <div className="absolute inset-0 bg-gradient-to-r from-cyan-300 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity z-0" />
                         </a>
 
-                        <a href="https://drive.google.com/file/u/0/d/1oTOppMXbzDPIRicQrbQ8cpUAEb7md7Ip/view?usp=drivesdk&pli=1" target="_blank" className="px-8 py-4 glass text-white font-semibold rounded-full hover:bg-white/10 transition-colors flex items-center gap-2">
+                        <a href="https://drive.google.com/file/u/0/d/1oTOppMXbzDPIRicQrbQ8cpUAEb7md7Ip/view?usp=drivesdk&pli=1" target="_blank" className="px-6 py-3.5 sm:px-8 sm:py-4 glass text-white font-semibold rounded-full hover:bg-white/10 transition-colors flex items-center gap-2 text-sm sm:text-base">
                             <Download size={18} />
                             Resume
                         </a>
 
-                        <a href="#contact" className="px-8 py-4 glass border-purple-500/30 text-purple-300 font-semibold rounded-full hover:bg-purple-900/30 transition-colors flex items-center gap-2">
+                        <a href="#contact" className="px-6 py-3.5 sm:px-8 sm:py-4 glass border-purple-500/30 text-purple-300 font-semibold rounded-full hover:bg-purple-900/30 transition-colors flex items-center gap-2 text-sm sm:text-base">
                             <Mail size={18} />
                             Contact Me
                         </a>

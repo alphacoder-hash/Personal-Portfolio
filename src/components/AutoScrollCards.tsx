@@ -76,7 +76,7 @@ export function AutoScrollCards({ stats, displayPlatforms }: AutoScrollCardsProp
             {[...Array(2)].map((_, setIndex) => (
                 <div key={setIndex} className="flex flex-nowrap gap-8">
                     {allItems.map((item, itemIndex) => (
-                        <div key={`${setIndex}-${itemIndex}`} className="min-w-[280px] flex-shrink-0 h-full">
+                        <div key={`${setIndex}-${itemIndex}`} className="min-w-[240px] xs:min-w-[280px] flex-shrink-0 h-full">
                             <div className={`glass p-6 rounded-2xl border border-white/5 hover:border-white/20 transition-all duration-300 group h-full flex flex-col justify-between hover:shadow-lg`}>
                                 <div>
                                     <div className="flex items-center justify-between mb-4">

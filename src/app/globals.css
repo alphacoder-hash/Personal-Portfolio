@@ -60,4 +60,18 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  @keyframes shine {
+    0% {
+      transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+
+    100% {
+      transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+  }
+
+  .animate-shine {
+    animation: shine 3s ease-in-out infinite;
+  }
 }

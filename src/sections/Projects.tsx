@@ -70,7 +70,7 @@ const TiltCard = ({ project, index }: { project: any, index: number }) => {
             className="relative w-full rounded-3xl glass p-8 border border-white/10 hover:border-white/20 transition-colors"
         >
             <div
-                style={{ transform: "translateZ(50px)" }}
+                style={{ transform: "translateZ(50px)" } as any}
                 className="flex flex-col h-full justify-between"
             >
                 <div>
@@ -83,7 +83,7 @@ const TiltCard = ({ project, index }: { project: any, index: number }) => {
                     </p>
                 </div>
 
-                <div style={{ transform: "translateZ(30px)" }}>
+                <div style={{ transform: "translateZ(30px)" } as any}>
                     <div className="flex flex-wrap gap-2 mb-8">
                         {project.tech.map((t: string) => (
                             <span key={t} className="px-3 py-1 bg-white/5 rounded-full text-xs font-semibold text-cyan-200 border border-white/5">

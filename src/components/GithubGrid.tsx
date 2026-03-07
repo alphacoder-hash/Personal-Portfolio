@@ -94,7 +94,7 @@ function RepoCard({ repo, index }: { repo: any; index: number }) {
             onMouseLeave={() => setHovered(false)}
             animate={{ y: [0, -12, 0] }}
             transition={{ y: { duration: 5 + (index % 3), repeat: Infinity, ease: "easeInOut", delay: driftDelay } }}
-            className="relative shrink-0 w-[340px] h-[360px] block cursor-pointer group"
+            className="relative shrink-0 w-[290px] xs:w-[320px] sm:w-[340px] h-[360px] block cursor-pointer group"
         >
             {/* Outer glow */}
             <motion.div
