@@ -71,7 +71,7 @@ const Navbar = () => {
                             <Code2 size={18} className="text-white" />
                         </motion.div>
                         <span className="text-xl font-extrabold tracking-tight text-white">
-                            Vaibhav<span className="neon-text">.dev</span>
+                            Vaibhav <span className="text-cyan-400">Pandey</span>
                         </span>
                     </a>
 
@@ -151,7 +151,7 @@ const Navbar = () => {
                             {/* Drawer header */}
                             <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
                                 <span className="text-lg font-extrabold text-white">
-                                    Vaibhav<span className="neon-text">.dev</span>
+                                    Vaibhav <span className="text-cyan-400">Pandey</span>
                                 </span>
                                 <button
                                     onClick={() => setMobileOpen(false)}
