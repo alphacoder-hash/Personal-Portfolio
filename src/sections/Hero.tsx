@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Download, ChevronRight, Mail, Code, Terminal, Cpu, Database, Layers } from 'lucide-react';
+import AnimatedAvatar from '@/components/AnimatedAvatar';
 
 const roles = [
     "Pre-Final Year CSE Student",
@@ -149,15 +150,7 @@ const Hero = () => {
                     <div className="absolute w-[300px] h-[300px] rounded-full bg-purple-600/20 blur-[80px] translate-x-10 translate-y-10 pointer-events-none" />
 
                     {/* Main Avatar */}
-                    <motion.div
-                        animate={{ y: [0, -15, 0] }}
-                        transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                        className="relative z-10 w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full glass border-4 border-cyan-400/50 shadow-[0_0_40px_rgba(34,211,238,0.3)] overflow-hidden flex items-center justify-center p-2"
-                    >
-                        <div className="w-full h-full rounded-full overflow-hidden">
-                            <img src="/avatar.png" alt="Vaibhav Pandey" className="w-full h-full object-cover" />
-                        </div>
-                    </motion.div>
+                    <AnimatedAvatar />
 
                     {/* Floating Tech Icons */}
                     <motion.div custom={1} variants={floatingIconVariants} animate="animate" className="absolute top-0 lg:top-10 left-0 lg:left-10 p-3 sm:p-4 rounded-2xl glass border border-blue-400/30 text-blue-400 shadow-lg z-20">
