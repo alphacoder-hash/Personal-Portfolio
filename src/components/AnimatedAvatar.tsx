@@ -34,7 +34,7 @@ export default function AnimatedAvatar() {
       {/* Avatar container with illustration */}
       <div className="relative w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         <img
-          src="/avatar.png?v=2"
+          src="/avatar.png?v=3"
           alt="Vaibhav Pandey"
           className="w-full h-full object-cover"
         />
@@ -44,9 +44,9 @@ export default function AnimatedAvatar() {
           className="absolute inset-0 rounded-full"
           animate={{
             background: [
-              "linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%)",
-              "linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 100%)",
-              "linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%)",
+              "linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%)",
+              "linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0) 100%)",
+              "linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%)",
             ],
           }}
           transition={{ duration: 3, repeat: Infinity }}
