@@ -57,7 +57,7 @@ Follow these steps to set up the project locally.
    ```bash
    npm run dev
    ```
-   Visit [http://localhost:3000](http://localhost:3000) in your browser.
+   Visit [http://localhost:3000](http://localhost:3000) in your local machine.
 
 ## 📂 Project Structure
 
