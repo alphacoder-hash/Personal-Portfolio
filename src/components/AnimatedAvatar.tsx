@@ -7,26 +7,34 @@ export default function AnimatedAvatar() {
     <motion.div
       animate={{ y: [0, -15, 0] }}
       transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-      className="relative z-10 w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full glass border-4 border-cyan-400/50 shadow-[0_0_40px_rgba(34,211,238,0.3)] overflow-hidden flex items-center justify-center p-2"
+      className="relative z-10 w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden flex items-center justify-center"
     >
-      {/* Animated gradient background */}
+      {/* Animated outer glow rings */}
       <motion.div
-        className="absolute inset-0 rounded-full"
+        className="absolute inset-0 rounded-full border-2 border-cyan-400/50"
         animate={{
-          background: [
-            "linear-gradient(45deg, #0ea5e9, #06b6d4)",
-            "linear-gradient(90deg, #06b6d4, #0284c7)",
-            "linear-gradient(135deg, #0284c7, #0ea5e9)",
-            "linear-gradient(45deg, #0ea5e9, #06b6d4)",
+          boxShadow: [
+            "0 0 20px rgba(34, 211, 238, 0.4), inset 0 0 20px rgba(34, 211, 238, 0.1)",
+            "0 0 40px rgba(34, 211, 238, 0.6), inset 0 0 30px rgba(34, 211, 238, 0.2)",
+            "0 0 20px rgba(34, 211, 238, 0.4), inset 0 0 20px rgba(34, 211, 238, 0.1)",
           ],
         }}
-        transition={{ duration: 8, repeat: Infinity }}
+        transition={{ duration: 3, repeat: Infinity }}
       />
 
-      {/* Avatar container */}
-      <div className="relative w-full h-full rounded-full overflow-hidden">
+      {/* Middle glow ring */}
+      <motion.div
+        className="absolute inset-2 rounded-full border border-purple-500/30"
+        animate={{
+          opacity: [0.3, 0.6, 0.3],
+        }}
+        transition={{ duration: 4, repeat: Infinity }}
+      />
+
+      {/* Avatar container with illustration */}
+      <div className="relative w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         <img
-          src="/avatar.png"
+          src="/avatar-illustration.png"
           alt="Vaibhav Pandey"
           className="w-full h-full object-cover"
         />
@@ -36,9 +44,9 @@ export default function AnimatedAvatar() {
           className="absolute inset-0 rounded-full"
           animate={{
             background: [
-              "linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%)",
-              "linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%)",
-              "linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%)",
+              "linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%)",
+              "linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 100%)",
+              "linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%)",
             ],
           }}
           transition={{ duration: 3, repeat: Infinity }}
@@ -49,16 +57,10 @@ export default function AnimatedAvatar() {
           className="absolute inset-0 rounded-full border-2 border-transparent"
           animate={{
             borderColor: [
-              "rgba(34, 211, 238, 0.5)",
-              "rgba(59, 130, 246, 0.5)",
-              "rgba(168, 85, 247, 0.5)",
-              "rgba(34, 211, 238, 0.5)",
-            ],
-            boxShadow: [
-              "0 0 20px rgba(34, 211, 238, 0.3)",
-              "0 0 30px rgba(59, 130, 246, 0.3)",
-              "0 0 20px rgba(168, 85, 247, 0.3)",
-              "0 0 20px rgba(34, 211, 238, 0.3)",
+              "rgba(34, 211, 238, 0.6)",
+              "rgba(59, 130, 246, 0.6)",
+              "rgba(168, 85, 247, 0.6)",
+              "rgba(34, 211, 238, 0.6)",
             ],
           }}
           transition={{ duration: 4, repeat: Infinity }}
