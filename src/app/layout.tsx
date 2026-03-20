@@ -21,7 +21,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import Background3D from "@/components/Background3D";
-import AnnouncementBar from "@/components/AnnouncementBar";
 
 export default function RootLayout({
   children,
@@ -35,7 +34,6 @@ export default function RootLayout({
       >
         <Background3D />
         <CustomCursor />
-        <AnnouncementBar />
         <Navbar />
         <main className="relative z-10 flex flex-col min-h-screen">
           {children}
