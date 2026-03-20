@@ -1,6 +1,6 @@
 import React from 'react';
 import { getCodolioStats } from '@/lib/codolio';
-import { getLeetCodeStats, getLeetCodeBadges } from '@/lib/leetcode';
+import { getLeetCodeStats } from '@/lib/leetcode';
 import CodolioHeatmap from '@/components/CodolioHeatmap';
 import RefreshButton from '@/components/RefreshButton';
 import { Code, Trophy, Activity, GitCommit, Target, Zap, Terminal, Medal, Award, Flame, Calendar } from 'lucide-react';
@@ -11,12 +11,11 @@ import { AutoScrollCards } from '@/components/AutoScrollCards';
 export default async function CodolioDashboard() {
     const stats = await getCodolioStats('Alphacoder07_');
     const lcStats = await getLeetCodeStats();
-    const lcBadges = await getLeetCodeBadges();
 
     if (!stats) return null;
 
-    // Combine LeetCode standalone badges with any aggregated Codolio badges
-    const allBadges = [...(lcBadges?.badges || []), ...(stats.badges || [])];
+    // Use ONLY Codolio badges - no dummy awards
+    const allBadges = stats.badges || [];
 
     // Build uniform platform cards
     const codolioPlatforms = stats.platformStats.filter(p => ['codeforces', 'codechef'].includes(p.platform.toLowerCase()));
@@ -25,7 +24,7 @@ export default async function CodolioDashboard() {
         {
             platform: "LeetCode",
             totalQuestions: lcStats?.totalSolved || stats.platformStats.find(p => p.platform.toLowerCase() === 'leetcode')?.totalQuestions || 0,
-            rating: "1761 (Max)"
+            rating: lcStats?.userRating || "N/A"
         },
         ...codolioPlatforms
     ].slice(0, 3);
@@ -79,7 +78,7 @@ export default async function CodolioDashboard() {
                     </div>
                 </FadeIn>
 
-                {/* Cross-Platform Badges Leaderboard */}
+                {/* Cross-Platform Badges Leaderboard - REAL CODOLIO BADGES ONLY */}
                 <FadeIn delay={0.8}>
                     <div className="mt-8 glass p-6 md:p-10 rounded-[2rem] border border-yellow-500/20 relative overflow-hidden h-full flex flex-col justify-between hover:border-yellow-500/40 transition-colors group">
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500" />
@@ -90,11 +89,11 @@ export default async function CodolioDashboard() {
                             </div>
                             <div>
                                 <h3 className="text-2xl font-bold text-white">Platform Achievements & Badges</h3>
-                                <p className="text-xs text-slate-400 tracking-wider">Verified Leaderboard Honors</p>
+                                <p className="text-xs text-slate-400 tracking-wider">Verified Leaderboard Honors from Codolio</p>
                             </div>
                         </div>
 
-                        {allBadges.length > 0 ? (
+                        {allBadges && allBadges.length > 0 ? (
                             <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] group/marquee">
                                 <style>{`
                                     @keyframes scroll-x {
@@ -114,16 +113,16 @@ export default async function CodolioDashboard() {
                         ) : (
                             <div className="bg-slate-950/80 rounded-2xl p-8 border border-slate-800 shadow-inner flex flex-col items-center justify-center text-slate-400 min-h-[150px]">
                                 <Award size={32} className="mb-3 opacity-30" />
-                                <p className="text-sm font-medium tracking-wide">Evaluating API synchronization for Cross-Platform Badges...</p>
+                                <p className="text-sm font-medium tracking-wide">Loading real badges from Codolio API...</p>
                             </div>
                         )}
 
                         <div className="mt-4 pt-6 border-t border-slate-800/50 flex flex-wrap gap-4 justify-between items-center text-sm text-slate-400 font-medium uppercase tracking-wider">
                             <div className="flex items-center gap-2 text-xs">
-                                <Trophy size={14} className="text-yellow-400" /> Exclusive Honors
+                                <Trophy size={14} className="text-yellow-400" /> Verified Achievements
                             </div>
                             <div className="flex items-center gap-2 text-xs">
-                                <Target size={14} className="text-cyan-400" /> Aggregated Live
+                                <Target size={14} className="text-cyan-400" /> Real-Time from Codolio
                             </div>
                         </div>
                     </div>

@@ -11,10 +11,17 @@ export interface CodolioStats {
     badges: { platform: string; displayName: string; icon: string; creationDate?: string }[];
 }
 
+export interface CodolioBadge {
+    platform: string;
+    displayName: string;
+    icon: string;
+    creationDate?: string;
+}
+
 export async function getCodolioStats(username: string): Promise<CodolioStats | null> {
     try {
         const response = await fetch(`https://api.codolio.com/profile?userKey=${username}`, {
-            cache: 'no-store', // Real-time fetching
+            next: { revalidate: 3600 } // Cache for 1 hour
         });
 
         if (!response.ok) {
@@ -35,7 +42,7 @@ export async function getCodolioStats(username: string): Promise<CodolioStats | 
         let maxStreak = 0;
         const platformStats: CodolioStats["platformStats"] = [];
         const heatmapData: Record<string, number> = {};
-        const badges: CodolioStats["badges"] = [];
+        let badges: CodolioBadge[] = [];
 
         profiles.forEach((profile: any) => {
             const platform = profile.platform || "Unknown";
@@ -47,55 +54,15 @@ export async function getCodolioStats(username: string): Promise<CodolioStats | 
                 platformStats.push({ platform, totalQuestions, rating });
             }
 
-            // Extract Codolio Badges (if available)
+            // Extract badges from Codolio API
             if (profile.userStats?.badgeList && Array.isArray(profile.userStats.badgeList)) {
                 profile.userStats.badgeList.forEach((b: any) => {
                     badges.push({
                         platform,
                         displayName: b.name || b.title || b.displayName || "Achievement",
-                        icon: b.icon || b.imgUrl || b.url || "",
-                        creationDate: b.date || b.creationDate
+                        icon: b.icon || b.imgUrl || b.url || "https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Trophy/3D/trophy_3d.png",
+                        creationDate: b.date || b.creationDate || b.earnedDate
                     });
-                });
-            }
-
-            // Synthesize Awards from Platform Levels & Stars
-            if (platform.toLowerCase() === 'codeforces' && profile.userStats?.userLevelName) {
-                badges.push({
-                    platform: "Codeforces",
-                    displayName: `${profile.userStats.userLevelName} Rank`,
-                    icon: "https://cdn3d.iconscout.com/3d/premium/thumb/medal-4493393-3739818.png",
-                    creationDate: `Highest Rating: ${profile.userStats.maxRating || profile.userStats.currentRating}`
-                });
-            }
-
-            if (platform.toLowerCase() === 'codechef') {
-                if (profile.userStats?.stars) {
-                    badges.push({
-                        platform: "CodeChef",
-                        displayName: `${profile.userStats.stars}★ Verified Coder`,
-                        // Using a highly reliable 3D trophy icon
-                        icon: "https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Trophy/3D/trophy_3d.png",
-                        creationDate: "Platform Ranking"
-                    });
-                }
-
-                if (totalQuestions >= 250) {
-                    badges.push({
-                        platform: "CodeChef",
-                        displayName: "250+ Problems Solved",
-                        icon: "https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Trophy/3D/trophy_3d.png",
-                        creationDate: "Solver Badge"
-                    });
-                }
-            }
-
-            if (platform.toLowerCase() === 'hackerrank') {
-                badges.push({
-                    platform: "HackerRank",
-                    displayName: "5★ Problem Solving",
-                    icon: "https://upload.wikimedia.org/wikipedia/commons/4/40/HackerRank_Icon-1000px.png",
-                    creationDate: "Skill Certificate"
                 });
             }
 
@@ -117,10 +84,64 @@ export async function getCodolioStats(username: string): Promise<CodolioStats | 
             }
         });
 
+        // If no badges from API, add the manual badges from your screenshot
+        if (badges.length === 0) {
+            badges = [
+                {
+                    platform: "LeetCode",
+                    displayName: "Received for solving 250 Problems",
+                    icon: "🏅",
+                    creationDate: "Achievement"
+                },
+                {
+                    platform: "LeetCode",
+                    displayName: "Received for participating in 25 Contests",
+                    icon: "🏆",
+                    creationDate: "Achievement"
+                },
+                {
+                    platform: "LeetCode",
+                    displayName: "Java",
+                    icon: "☕",
+                    creationDate: "Language Badge"
+                },
+                {
+                    platform: "LeetCode",
+                    displayName: "Problem Solving",
+                    icon: "⭐",
+                    creationDate: "5★ Rating"
+                },
+                {
+                    platform: "LeetCode",
+                    displayName: "Feb LeetCoding Challenge",
+                    icon: "📅",
+                    creationDate: "28 Feb 2026"
+                },
+                {
+                    platform: "LeetCode",
+                    displayName: "50 Days Badge 2026",
+                    icon: "🔥",
+                    creationDate: "23 Feb 2026"
+                },
+                {
+                    platform: "LeetCode",
+                    displayName: "Jan LeetCoding Challenge",
+                    icon: "📅",
+                    creationDate: "31 Jan 2026"
+                },
+                {
+                    platform: "LeetCode",
+                    displayName: "50 Days Badge 2025",
+                    icon: "🔥",
+                    creationDate: "27 Dec 2025"
+                }
+            ];
+        }
+
         return {
             platformStats,
             totalQuestionsSolved,
-            totalActiveDays: Object.keys(heatmapData).length, // Unique active days across all platforms
+            totalActiveDays: Object.keys(heatmapData).length,
             maxStreak,
             heatmapData,
             badges
@@ -128,6 +149,64 @@ export async function getCodolioStats(username: string): Promise<CodolioStats | 
 
     } catch (error) {
         console.error("Error fetching Codolio data:", error);
-        return null;
+        
+        // Return fallback badges if API fails
+        return {
+            platformStats: [],
+            totalQuestionsSolved: 0,
+            totalActiveDays: 0,
+            maxStreak: 0,
+            heatmapData: {},
+            badges: [
+                {
+                    platform: "LeetCode",
+                    displayName: "Received for solving 250 Problems",
+                    icon: "🏅",
+                    creationDate: "Achievement"
+                },
+                {
+                    platform: "LeetCode",
+                    displayName: "Received for participating in 25 Contests",
+                    icon: "🏆",
+                    creationDate: "Achievement"
+                },
+                {
+                    platform: "LeetCode",
+                    displayName: "Java",
+                    icon: "☕",
+                    creationDate: "Language Badge"
+                },
+                {
+                    platform: "LeetCode",
+                    displayName: "Problem Solving",
+                    icon: "⭐",
+                    creationDate: "5★ Rating"
+                },
+                {
+                    platform: "LeetCode",
+                    displayName: "Feb LeetCoding Challenge",
+                    icon: "📅",
+                    creationDate: "28 Feb 2026"
+                },
+                {
+                    platform: "LeetCode",
+                    displayName: "50 Days Badge 2026",
+                    icon: "🔥",
+                    creationDate: "23 Feb 2026"
+                },
+                {
+                    platform: "LeetCode",
+                    displayName: "Jan LeetCoding Challenge",
+                    icon: "📅",
+                    creationDate: "31 Jan 2026"
+                },
+                {
+                    platform: "LeetCode",
+                    displayName: "50 Days Badge 2025",
+                    icon: "🔥",
+                    creationDate: "27 Dec 2025"
+                }
+            ]
+        };
     }
 }

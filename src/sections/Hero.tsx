@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Download, ChevronRight, Mail, Code, Terminal, Cpu, Database, Layers } from 'lucide-react';
 
@@ -11,45 +11,18 @@ const roles = [
 ];
 
 const RotatingRole = ({ role, index }: { role: string, index: number }) => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const textRef = useRef<HTMLSpanElement>(null);
-    const [overflow, setOverflow] = useState(0);
-
-    useEffect(() => {
-        if (containerRef.current && textRef.current) {
-            const containerWidth = containerRef.current.offsetWidth;
-            const textWidth = textRef.current.scrollWidth;
-            if (textWidth > containerWidth) {
-                setOverflow(textWidth - containerWidth + 20); // Add some padding
-            } else {
-                setOverflow(0);
-            }
-        }
-    }, [role]);
-
     return (
-        <div ref={containerRef} className="w-full h-full relative overflow-hidden flex justify-center lg:justify-start">
+        <div className="w-full h-full relative overflow-hidden flex justify-center lg:justify-start">
             <motion.span
-                ref={textRef}
                 key={index}
-                initial={{ opacity: 0, y: 20, x: 0 }}
-                animate={{
-                    opacity: 1,
-                    y: 0,
-                    x: overflow > 0 ? [0, -overflow, 0] : 0
-                }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{
-                    y: { duration: 0.4 },
-                    opacity: { duration: 0.4 },
-                    x: {
-                        duration: 6,
-                        repeat: Infinity,
-                        ease: "linear",
-                        delay: 1
-                    }
+                    duration: 0.4,
+                    ease: "easeInOut"
                 }}
-                className="absolute text-xl sm:text-2xl lg:text-3xl font-medium text-slate-300 whitespace-nowrap px-4"
+                className="text-xl sm:text-2xl lg:text-3xl font-medium text-slate-300 whitespace-nowrap px-4"
             >
                 {role}
             </motion.span>

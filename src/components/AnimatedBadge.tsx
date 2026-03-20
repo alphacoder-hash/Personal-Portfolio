@@ -65,7 +65,7 @@ export default function AnimatedBadge({ badge, index }: AnimatedBadgeProps) {
                     />
                 ) : (
                     <div className="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center shadow-inner">
-                        <span className="text-yellow-500 font-bold text-2xl">🏆</span>
+                        <span className="text-yellow-500 font-bold text-4xl">{badge.icon || "🏆"}</span>
                     </div>
                 )}
             </motion.div>
