@@ -34,7 +34,7 @@ export default function AnimatedAvatar() {
       {/* Avatar container with illustration */}
       <div className="relative w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         <img
-          src="/avatar.png"
+          src="/avatar.png?v=2"
           alt="Vaibhav Pandey"
           className="w-full h-full object-cover"
         />
